@@ -1,0 +1,11 @@
+# Try out this Function: remind_me()
+
+# This function reminds me of what I need to do this week
+
+remind_me <- function(){
+  # Create a list of things to remember
+  things_to_remember <- c('e-mail Marjolein', 'order bathtub', 'Call Yente', 'Pack my bags')
+  return(things_to_remember)
+}
+
+remind_me()
