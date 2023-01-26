@@ -1,0 +1,77 @@
+# Function: cheat on exercises
+
+# This function provides the answers of questions 6, 8 and 11 of week 3
+
+cheat <- function(exercise_number){
+  if (exercise_number == 6){
+    return("The correct solution for exercise 3.1.6 is: [# Select the desired chickens
+chick_subset <- subset(ChickWeight, Chick %in% c('1', '20', '3', '40', '5'))
+
+# Compute the maximum weight for each chicken
+chick_max <- aggregate(weight ~ Chick, data=chick_subset, max)
+
+# Plot the data
+ggplot(data = chick_max, 
+       aes(x = reorder(Chick, Chick, 
+                       function(x) factor(x, levels = c('1', '20', '3', '40', '5'))), 
+           y = weight)) + 
+  geom_bar(stat = 'identity') + 
+  xlab('chick') +
+  ylab('max_weight') + 
+  theme_minimal()
+# Reorder is used to arrange the chickens in the right order
+]")
+  } else if (exercise_number == 8){
+    return("The correct solution for exercise 3.1.8 is: [library(patchwork)
+# creating and storing bar plot in p1
+p1<- ggplot(
+  data = chick_max,
+  aes(
+    x = reorder(
+      Chick, Chick,
+      function(x) {
+        factor(x, levels = c('1', '20', '3', '40', '5'))
+      }
+    ),
+    y = weight
+  )
+) +
+  geom_bar(stat = 'identity') +
+  xlab('chick') +
+  ylab('max_weight') +
+  theme_minimal()
+
+# Reordering chickens 
+chick_subset$Chick <- factor(chick_subset$Chick, levels = c('1', '20', '3', '40', '5'))
+
+# creating and storing line graph in p2
+p2 <- ggplot(chick_subset, aes(x = Time, y = weight, group = Chick)) +
+  geom_line(aes(color=Chick)) 
+
+# adding two plots together
+p1 + p2]")
+  } else if (exercise_number == 11){
+    return("The correct solution for exercise 3.1.11 is: [library(gganimate)
+library(gifski)
+library(png)
+library(cranlogs)
+
+# Get the download data for the caret and tidymodels packages
+caret_downloads <- cran_downloads(package = 'caret', from = '2014-01-01', to = '2022-01-01')
+tidymodels_downloads <- cran_downloads(package = 'tidymodels', from = '2014-01-01', to = '2022-01-01')
+
+# Combine the data for both packages
+downloads_data <- rbind(caret_downloads, tidymodels_downloads)
+
+# Create a ggplot object for the animation
+ggplot(downloads_data, aes(x = date, y = count, group = package, color = package)) +
+  geom_line() +
+  transition_reveal(date) +
+  labs(title = 'Package Downloads Over Time', x = 'Date', y = 'Downloads')
+
+# gganimate() function to create the animation
+gganimate(interval = 0.1, loop = 'infinite')]")
+  } else {
+    return("Invalid exercise number. Please enter number 6, 8 or 11.")
+  }
+}
